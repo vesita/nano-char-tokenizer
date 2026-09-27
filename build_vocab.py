@@ -4,8 +4,8 @@ Sources:
 Directly mined from nanoSeek's real-world Chinese corpora (7 dialogue corpora) sorted by real frequency:
 - 16 Special tokens (<pad>, <unk>, <bos>, <eos>, <sep>, <resp>, etc.)
 - 128 Basic ASCII & Fullwidth Punctuation
-- Exactly Top 4856 most frequent Chinese characters
-Total size: Exactly 5000 tokens! Pure characters, 100% genuine Chinese coverage, zero BPE artifacts.
+- Exactly Top 5856 most frequent Chinese characters
+Total size: Exactly 6000 tokens! Pure characters, 100% genuine Chinese coverage, zero BPE artifacts.
 """
 import glob
 import os
@@ -26,7 +26,7 @@ ASCII_PUNCT = (
 ASCII_PUNCT = list(dict.fromkeys(ASCII_PUNCT))  # deduplicate preserving order
 
 
-def build_compact_5000_tokenizer(out_path: str = "src/nano_char_tokenizer/tokenizer.json"):
+def build_compact_6000_tokenizer(out_path: str = "src/nano_char_tokenizer/tokenizer.json"):
     print("Collecting character frequencies directly from nanoSeek Chinese corpora...")
     txt_files = sorted(glob.glob("/home/vesita/coding/my/nanoSeek/data/chinese/*dialogue.txt"))
     if not txt_files:
@@ -42,7 +42,7 @@ def build_compact_5000_tokenizer(out_path: str = "src/nano_char_tokenizer/tokeni
     hanzi = [(c, cnt) for c, cnt in counter.items() if "\u4e00" <= c <= "\u9fff" and c not in ASCII_PUNCT]
     hanzi.sort(key=lambda x: -x[1])
 
-    target_hanzi_count = 5000 - len(SPECIAL_TOKENS) - len(ASCII_PUNCT)
+    target_hanzi_count = 6000 - len(SPECIAL_TOKENS) - len(ASCII_PUNCT)
     selected_hanzi = [c for c, _ in hanzi[:target_hanzi_count]]
 
     vocab = {}
@@ -55,7 +55,7 @@ def build_compact_5000_tokenizer(out_path: str = "src/nano_char_tokenizer/tokeni
         if ch not in vocab:
             vocab[ch] = len(vocab)
 
-    print(f"\nConstructed 5000-char vocab:")
+    print(f"\nConstructed 6000-char vocab:")
     print(f"  Special tokens: {len(SPECIAL_TOKENS)}")
     print(f"  ASCII & Punctuation: {len(ASCII_PUNCT)}")
     print(f"  Frequent Chinese characters: {len(selected_hanzi)}")
@@ -74,4 +74,4 @@ def build_compact_5000_tokenizer(out_path: str = "src/nano_char_tokenizer/tokeni
 
 if __name__ == "__main__":
     out_dir = os.path.dirname(os.path.abspath(__file__))
-    build_compact_5000_tokenizer(os.path.join(out_dir, "src/nano_char_tokenizer/tokenizer.json"))
+    build_compact_6000_tokenizer(os.path.join(out_dir, "src/nano_char_tokenizer/tokenizer.json"))

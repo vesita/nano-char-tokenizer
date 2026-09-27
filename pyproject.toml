@@ -1,0 +1,16 @@
+[project]
+name = "nano-char-tokenizer"
+version = "0.1.0"
+description = "Shared 8192-sparse Chinese character-level tokenizer for nanoSeek and DTSeek"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "tokenizers>=0.20.0",
+]
+
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.package-data]
+nano_char_tokenizer = ["tokenizer.json"]

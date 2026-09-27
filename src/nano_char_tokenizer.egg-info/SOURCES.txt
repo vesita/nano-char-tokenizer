@@ -1,0 +1,9 @@
+README.md
+pyproject.toml
+src/nano_char_tokenizer/__init__.py
+src/nano_char_tokenizer/tokenizer.json
+src/nano_char_tokenizer.egg-info/PKG-INFO
+src/nano_char_tokenizer.egg-info/SOURCES.txt
+src/nano_char_tokenizer.egg-info/dependency_links.txt
+src/nano_char_tokenizer.egg-info/requires.txt
+src/nano_char_tokenizer.egg-info/top_level.txt
